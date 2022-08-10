@@ -2,9 +2,9 @@
 FROM node:17.8-alpine
 
 # add tini & create app folder
-RUN apk add --no-cache tini && mkdir -p /usr/src/app
+# RUN apk add --no-cache tini && mkdir -p /usr/src/app
 
-WORKDIR /usr/src/app
+WORKDIR /
 
 COPY package.json .
 COPY package-lock.json .
