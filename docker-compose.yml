@@ -1,0 +1,21 @@
+version: '3.7'
+
+networks:
+  net:
+    external: true
+    driver: bridge
+
+services:
+  
+  backend:
+    container_name: backend-test-mqtt
+    restart: unless-stopped
+    build:
+      context: ./frontend
+    platform: linux/amd64
+    ports:
+      - 3323:3323
+    networks:
+      - net
+    volumes:
+      - ./frontend:/usr/src/app
