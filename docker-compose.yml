@@ -6,16 +6,47 @@ networks:
     driver: bridge
 
 services:
-  
-  backend:
-    container_name: backend-test-mqtt
-    restart: unless-stopped
-    build:
-      context: ./
-    platform: linux/amd64
+  frontend:
+    container_name: frontend
+    restart: always
+    build: 
+      context: ./frontend
     ports:
-      - 3323:3323
+      - 5173:5173
     networks:
       - net
+
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: ./backend
+    ports:
+      - 3323:3323
     volumes:
-      - ./frontend:/usr/src/app
+      - ./backend:/usr/src/app:cached
+    networks:
+      - net
+
+  nginx:
+    container_name: nginx
+    restart: always
+    image: ubuntu/nginx
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - net
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/conf:/etc/letsencrypt:rw
+    networks:
+      - net
