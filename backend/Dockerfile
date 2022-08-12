@@ -13,6 +13,6 @@ RUN npm install && npm cache clean --force
 # RUN npm install -g nodemon
 COPY . .
 
-EXPOSE 3333
+EXPOSE 8888
 
-CMD ["npm", "run", "dev"]
+CMD ["node", "index.js"]

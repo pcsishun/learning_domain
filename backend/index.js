@@ -14,16 +14,11 @@ app.use(express.urlencoded());
 const port  = process.env.PORT;
 
 
-app.get("/", (req, res) => {
+app.get("backend/", (req, res) => {
     res.send("ok");
 });
 
-
-
-
-
-
-app.get("/testing", (req, res) => {
+app.get("backend/testing", (req, res) => {
     console.log("mqtt api")
     try{
 
@@ -80,6 +75,7 @@ app.get("/testing", (req, res) => {
 })
 
 
-app.listen(port, () => {
-    console.log(`app listen at port ${port} ==> http://localhost:${port}`)
+app.listen(8888, () => {
+    // console.log(`app listen at port ${port} ==> http://localhost:${port}`)
+    console.log(`app listen at port 8888 ==> http://localhost:8888`)
 })

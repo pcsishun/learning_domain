@@ -2,7 +2,7 @@
 FROM node:17.8-alpine
 
 # add tini & create app folder
-RUN apk add --no-cache tini && mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
@@ -13,6 +13,6 @@ RUN npm install && npm cache clean --force
 # RUN npm install -g nodemon
 COPY . .
 
-EXPOSE 5173
+EXPOSE 3333
 
 CMD ["npm", "run", "dev"]

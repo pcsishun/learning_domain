@@ -12,7 +12,7 @@ services:
     build: 
       context: ./frontend
     ports:
-      - 5173:5173
+      - 3333:3333
     networks:
       - net
 
@@ -22,9 +22,7 @@ services:
     build:
       context: ./backend
     ports:
-      - 3323:3323
-    volumes:
-      - ./backend:/usr/src/app:cached
+      - 8888:8888
     networks:
       - net
 
